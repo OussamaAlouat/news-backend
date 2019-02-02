@@ -42,14 +42,14 @@ const getAllDocuments = (req, res) => {
 };
 
 const getOneDocument = (req, res) => {
-  const {id} = req.body;
-  Document.findById( id)
-      .then((result) => {
-          res.status(200).json({data: result});
-      })
-      .catch((err) => {
-          res.status(200).json({data: []})
-      })
+    const {id} = req.body;
+    Document.findById(id)
+        .then((result) => {
+            res.status(200).json({data: result});
+        })
+        .catch((err) => {
+            res.status(204).json({data: []})
+        })
 };
 
 export {
