@@ -13,6 +13,18 @@ app.use(bodyParser());
 
 app.use('/', routes());
 
+// catch 404 and forward to error handler
+app.use( (req, res, next) => {
+    const err = Error('Not Found');
+    err.status = 404;
+    next(err);
+});
+
+// catch 500 internal sever error
+app.use( (err, req, res, next) =>{
+    res.status(err.status || 500).json(err);
+});
+
 const server = app.listen(process.env.PORT || config.port, () => {
     const listeningPort = process.env.PORT || config.port;
     console.log('Server listening on port ' + listeningPort);
