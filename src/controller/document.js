@@ -43,7 +43,7 @@ const getAllDocuments = (req, res) => {
 
 const getOneDocument = (req, res) => {
   const {id} = req.body;
-  Document.findOne({_id: id})
+  Document.findById( id)
       .then((result) => {
           res.status(200).json({data: result});
       })
