@@ -34,5 +34,14 @@ const postDocument = (req, res) => {
 
 
 };
+const getAllDocuments = (req, res) => {
+    Document.find()
+        .then((response) => {
+            res.json({data: response})
+        })
+};
 
-export {postDocument}
+export {
+    postDocument,
+    getAllDocuments
+}

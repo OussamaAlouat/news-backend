@@ -1,6 +1,6 @@
 import {Router} from 'express';
 import {index} from '../controller'
-import {postDocument} from "../controller/document";
+import {getAllDocuments, postDocument} from "../controller/document";
 import {check} from "express-validator/check";
 import {postCheckValidation} from "../middleware/validation";
 
@@ -21,6 +21,10 @@ export default () => {
         ],
         (req, res, next) => postCheckValidation(req, res, next),
         (req, res) => postDocument(req, res));
+
+    routes.get('/documents',
+        getAllDocuments
+    );
 
     return routes;
 }
