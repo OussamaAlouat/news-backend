@@ -7,29 +7,31 @@ const postDocument = (req, res) => {
     //we will put in our database.
     Document.find({title: title, description: description, author: author, content: content})
         .then((response) => {
-            if (response > 0) {
+            if (response.length > 0) {
                 const errorMessage = 'This document already exists on database';
                 res.status(409).json({message: errorMessage});
+            } else {
+                const newDocument = new Document({
+                    title: title,
+                    description: description,
+                    date: date,
+                    content: content,
+                    author: author,
+                    arhiveDate: arhiveDate
+                });
+
+                newDocument.save((err, data) => {
+                    if (err) {
+                        res.json(err)
+                    } else {
+                        const message = 'Document created correctly';
+                        res.status(201).json({message})
+                    }
+                })
+
             }
-
-            const newDocument = new Document({
-                title: title,
-                description: description,
-                date: date,
-                content: content,
-                author: author,
-                arhiveDate: arhiveDate
-            });
-
-            newDocument.save((err, data) => {
-                if (err) {
-                    res.json(err)
-                } else {
-                    const message = 'Document created correctly';
-                    res.status(201).json({message})
-                }
-            })
         })
+
 
 };
 
