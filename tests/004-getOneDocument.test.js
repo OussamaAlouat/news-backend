@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import {app, server} from '../src/index';
+import {app} from '../src/index';
 
 test('-------- Controller: Get /document', (assert) => {
     const url = '/document';
@@ -30,11 +30,9 @@ test('-------- Controller: Get /document', (assert) => {
             const document = response.body.data;
             assert.deepEqual(document, expectedDodument, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 
 });
@@ -63,11 +61,9 @@ test('-------- Controller: Get /document', (assert) => {
             const document = response.body;
             assert.deepEqual(document, expectedResponse, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 
 });
@@ -76,7 +72,7 @@ test('-------- Controller: Get /document', (assert) => {
     const url = '/document';
     const message = 'Status must be 200 and response must match with expected document';
 
-    const expectedDodument = [];
+    const expectedDocument = [];
 
     const payload = {
         id: 'theDocumentWillNotBeAtDatabase'
@@ -89,13 +85,11 @@ test('-------- Controller: Get /document', (assert) => {
         .expect(statusCodeExpected)
         .then((response) => {
             const document = response.body.data;
-            assert.deepEqual(document, expectedDodument, message);
+            assert.deepEqual(document, expectedDocument, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 
 });

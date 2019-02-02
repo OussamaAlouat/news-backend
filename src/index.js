@@ -29,9 +29,9 @@ app.use((err, req, res, next) => {
     res.status(err.status || 500).json(err);
 });
 
-const server = app.listen(process.env.PORT || config.port, () => {
+app.listen(process.env.PORT || config.port, () => {
     const listeningPort = process.env.PORT || config.port;
     console.log('Server listening on port ' + listeningPort);
 });
 
-export {app, server}
+export {app}

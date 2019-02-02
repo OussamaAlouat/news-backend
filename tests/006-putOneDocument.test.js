@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import {app, server} from '../src/index';
+import {app} from '../src/index';
 
 test('-------- Controller: PUT /document', (assert) => {
 
@@ -34,18 +34,15 @@ test('-------- Controller: PUT /document', (assert) => {
                     .send(payload)
                     .expect(statusCodeExpected)
                     .then((result) => {
-                        assert.deepEqual(result.body, responseExpected, message)
-                        server.close();
+                        assert.deepEqual(result.body, responseExpected, message);
                         assert.end();
                     }, (err) => {
                         assert.fail(err.message);
                         assert.end();
-                        server.close()
                     });
             }, (err) => {
                 assert.fail(err.message);
                 assert.end();
-                server.close()
             }
         );
 });
@@ -75,12 +72,10 @@ test('-------- Controller: PUT /document', (assert) => {
         .expect(statusCodeExpected)
         .then((result) => {
             assert.deepEqual(result.body, responseExpected, message);
-            server.close();
             assert.end();
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 
 });
@@ -124,17 +119,14 @@ test('-------- Controller: PUT /document', (assert) => {
                     .expect(statusCodeExpected)
                     .then((result) => {
                         assert.deepEqual(result.body, responseExpected, message);
-                        server.close();
                         assert.end();
                     }, (err) => {
                         assert.fail(err.message);
                         assert.end();
-                        server.close()
                     });
             }, (err) => {
                 assert.fail(err.message);
                 assert.end();
-                server.close()
             }
         );
 });

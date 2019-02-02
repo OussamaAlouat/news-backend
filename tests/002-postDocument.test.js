@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import {app, server} from '../src/index';
+import {app} from '../src/index';
 
 test('-------- Controller: Post /document', (assert) => {
     const url = '/document';
@@ -10,7 +10,7 @@ test('-------- Controller: Post /document', (assert) => {
     };
 
     const payload = {
-        title: 'New Document' + new Date() ,
+        title: 'New Document' + new Date(),
         description: 'This is a new test document',
         date: new Date(),
         content: 'The content of this document is a test',
@@ -23,19 +23,15 @@ test('-------- Controller: Post /document', (assert) => {
         .post(url)
         .send(payload)
         .expect(statusCodeExpected)
-        .then(
-            (res) => {
+        .then((res) => {
                 assert.deepEqual(res.body, responseExpected, message);
                 assert.end();
-                server.close()
             }, (err) => {
                 assert.fail(err.message);
                 assert.end();
-                server.close()
             }
         );
 });
-
 
 test('-------- Controller: Post /document', (assert) => {
     const url = '/document';
@@ -61,27 +57,22 @@ test('-------- Controller: Post /document', (assert) => {
         .post(url)
         .send(payload)
         .expect(statusCodeExpected)
-        .then(
-            (res) => {
+        .then((res) => {
                 request(app)
                     .post(url)
                     .send(payload)
-                    .then(
-                        (response) => {
+                    .then((response) => {
                             assert.deepEqual(response.body, responseExpected, message);
                             assert.end();
-                            server.close()
-                        } ,(err) => {
+                        }, (err) => {
                             assert.fail(err.message);
                             assert.end();
-                            server.close()
                         }
                     );
 
             }, (err) => {
                 assert.fail(err.message);
                 assert.end();
-                server.close()
             }
         );
 });
@@ -93,17 +84,16 @@ test('-------- Controller: Post /document', (assert) => {
     const responseExpected = {
         "errors": [
             {
-                "location": "body",
-                "param": "archiveDate",
-                "msg": "Invalid value"
+                location: "body",
+                param: "archiveDate",
+                msg: "Invalid value"
             }
         ]
     };
 
 
-
     const payload = {
-        title: 'New Document' + new Date() ,
+        title: 'New Document' + new Date(),
         description: 'This is a new test document',
         date: new Date(),
         content: 'The content of this document is a test',
@@ -115,15 +105,12 @@ test('-------- Controller: Post /document', (assert) => {
         .post(url)
         .send(payload)
         .expect(statusCodeExpected)
-        .then(
-            (res) => {
+        .then((res) => {
                 assert.deepEqual(res.body, responseExpected, message);
                 assert.end();
-                server.close()
             }, (err) => {
                 assert.fail(err.message);
                 assert.end();
-                server.close()
             }
         );
 });

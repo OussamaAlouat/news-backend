@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import {app, server} from '../src/index';
+import {app} from '../src/index';
 
 test('-------- Controller: Delete /document', (assert) => {
     const url = '/document';
@@ -23,11 +23,9 @@ test('-------- Controller: Delete /document', (assert) => {
             const document = response.body;
             assert.deepEqual(document, expectedResponse, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 });
 
@@ -61,17 +59,13 @@ test('-------- Controller: Delete /document', (assert) => {
                 .then((result) => {
                     assert.deepEqual(result.body.response, expectedResponse, message);
                     assert.end();
-                    server.close()
                 }, (err) => {
                     assert.fail(err.message);
                     assert.end();
-                    server.close()
                 });
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 
 });
@@ -97,10 +91,8 @@ test('-------- Controller: Delete /document', (assert) => {
             const document = response.body;
             assert.deepEqual(document, expectedResponse, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
 });

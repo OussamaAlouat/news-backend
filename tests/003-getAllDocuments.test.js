@@ -1,6 +1,6 @@
 import test from 'tape';
 import request from 'supertest';
-import {app, server} from '../src/index';
+import {app} from '../src/index';
 
 test('-------- Controller: Get /documents', (assert) => {
     const url = '/documents';
@@ -11,18 +11,14 @@ test('-------- Controller: Get /documents', (assert) => {
 
     request(app)
         .get(url)
-              .expect(statusCodeExpected)
-
+        .expect(statusCodeExpected)
         .then((response) => {
             const documents = response.body.data;
             assert.equal(documents.length > 0, true, message);
             assert.end();
-            server.close()
         }, (err) => {
             assert.fail(err.message);
             assert.end();
-            server.close()
         });
-
 });
 
