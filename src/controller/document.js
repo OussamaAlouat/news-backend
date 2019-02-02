@@ -34,6 +34,7 @@ const postDocument = (req, res) => {
 
 
 };
+
 const getAllDocuments = (req, res) => {
     Document.find()
         .then((response) => {
@@ -68,9 +69,31 @@ const removeOneDocument = (req, res) => {
         })
 };
 
+const updateOneDocument = (req, res) => {
+    const {id, title, description, content, arhiveDate} = req.body;
+    Document.findByIdAndUpdate(id, {
+        title: title,
+        description: description,
+        content: content,
+        arhiveDate: arhiveDate
+    }).then((result) => {
+        const response = {
+            message: "Document updated"
+        };
+
+        res.status(200).json(response);
+    }).catch((err) => {
+        const response = {
+            message: "Document not found"
+        };
+        res.status(200).json(response);
+    })
+};
+
 export {
     postDocument,
     getAllDocuments,
     getOneDocument,
-    removeOneDocument
+    removeOneDocument,
+    updateOneDocument
 }
