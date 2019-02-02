@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import configuration from './config';
 import routes from './routes';
+import db from './db';
 
 const app = express();
 
@@ -9,19 +10,22 @@ const app = express();
 const config = configuration(app);
 app.use(bodyParser());
 
+//DATABASE CONNECTION
+db.connect(config);
+
 //ROUTES----------------
 
 app.use('/', routes());
 
 // catch 404 and forward to error handler
-app.use( (req, res, next) => {
+app.use((req, res, next) => {
     const err = Error('Not Found');
     err.status = 404;
     next(err);
 });
 
 // catch 500 internal sever error
-app.use( (err, req, res, next) =>{
+app.use((err, req, res, next) => {
     res.status(err.status || 500).json(err);
 });
 
