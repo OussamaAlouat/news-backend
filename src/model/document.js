@@ -13,7 +13,8 @@ const DocumentSchema = Schema({
     },
     date: {
         type: Date,
-        required: true
+        required: true,
+        default: Date.now
     },
     content: {
         type: String,
@@ -25,7 +26,6 @@ const DocumentSchema = Schema({
     },
     archiveDate: {
         type:Date,
-        required:true,
         default:null
     }
 });
