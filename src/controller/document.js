@@ -52,6 +52,18 @@ const getOneDocument = (req, res) => {
         })
 };
 
+const removeOneDocument = (req, res) => {
+    const {id} = req.body;
+    Document.findByIdAndRemove(id)
+        .then((result) => {
+            console.log(result)
+            res.status(200).json({data: result});
+        })
+        .catch((err) => {
+            res.status(200).json({message: 'Document not found'})
+        })
+};
+
 export {
     postDocument,
     getAllDocuments,
