@@ -34,8 +34,9 @@ test('-------- Controller: PUT /document', (assert) => {
                     .send(payload)
                     .expect(statusCodeExpected)
                     .then((result) => {
-                        assert.deepEqual(result.body,responseExpected,message)
-
+                        assert.deepEqual(result.body, responseExpected, message)
+                        server.close();
+                        assert.end();
                     }, (err) => {
                         assert.fail(err.message);
                         assert.end();
@@ -47,4 +48,39 @@ test('-------- Controller: PUT /document', (assert) => {
                 server.close()
             }
         );
+});
+
+test('-------- Controller: PUT /document', (assert) => {
+
+    const putUrl = '/document';
+    const message = 'Status must be 200 and response must be (Document not found)';
+    const responseExpected = {
+        message: "Document not found"
+    };
+
+    const statusCodeExpected = 200;
+
+    const payload = {
+        id: 'ThisIdNotIdentifyAnyDocument',
+        title: 'Edited on: ' + new Date().getDay(),
+        description: 'This is a new test document',
+        content: 'The content of this document is a test',
+        author: 'Oussama Alouat',
+        archiveDate: new Date()
+    };
+
+    request(app)
+        .put(putUrl)
+        .send(payload)
+        .expect(statusCodeExpected)
+        .then((result) => {
+            assert.deepEqual(result.body, responseExpected, message);
+            server.close();
+            assert.end();
+        }, (err) => {
+            assert.fail(err.message);
+            assert.end();
+            server.close()
+        });
+
 });
