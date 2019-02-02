@@ -37,7 +37,7 @@ const postDocument = (req, res) => {
 const getAllDocuments = (req, res) => {
     Document.find()
         .then((response) => {
-            res.json({data: response})
+            res.status(200).json({data: response})
         })
 };
 
