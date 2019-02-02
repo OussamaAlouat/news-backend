@@ -14,7 +14,8 @@ test('-------- Controller: Post /document', (assert) => {
         description: 'This is a new test document',
         date: new Date(),
         content: 'The content of this document is a test',
-        author: 'Oussama Alouat'
+        author: 'Oussama Alouat',
+        archiveDate: null
     };
 
     const statusCodeExpected = 201;
@@ -52,7 +53,8 @@ test('-------- Controller: Post /document', (assert) => {
         description: 'This is a new test document',
         date: new Date(),
         content: 'The content of this document is a test',
-        author: 'Oussama Alouat'
+        author: 'Oussama Alouat',
+        archiveDate: null
     };
     const statusCodeExpected = 409;
     request(app)
