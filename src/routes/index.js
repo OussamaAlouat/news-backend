@@ -1,6 +1,12 @@
 import {Router} from 'express';
 import {index} from '../controller'
-import {getAllDocuments, getOneDocument, postDocument, removeOneDocument} from "../controller/document";
+import {
+    getAllDocuments,
+    getOneDocument,
+    postDocument,
+    removeOneDocument,
+    updateOneDocument
+} from "../controller/document";
 import {check} from "express-validator/check";
 import {postCheckValidation} from "../middleware/validation";
 
@@ -40,6 +46,18 @@ export default () => {
         ],
         (req, res, next) => postCheckValidation(req, res, next),
         (req, res) => removeOneDocument(req, res)
+    );
+
+    routes.put('/document',
+        [
+            check('id').isString(),
+            check('title').isLength({min: 4}),
+            check('description').isLength({min: 5}),
+            check('content').isLength({min: 5}),
+            check('archiveDate').exists({checkNull: false})
+        ],
+        (req, res, next) => postCheckValidation(req, res, next),
+        (req, res) => updateOneDocument(req, res)
     );
 
     return routes;
