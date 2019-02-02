@@ -48,7 +48,7 @@ const getOneDocument = (req, res) => {
             res.status(200).json({data: result});
         })
         .catch((err) => {
-            res.status(204).json({data: []})
+            res.status(200).json({data: []})
         })
 };
 
