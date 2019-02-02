@@ -39,3 +39,36 @@ test('-------- Controller: Get /document', (assert) => {
 
 });
 
+test('-------- Controller: Get /document', (assert) => {
+    const url = '/document';
+    const message = 'Status must be 422 and response must match with expected response';
+
+    const expectedResponse = {
+        errors: [
+            {
+                location: "body",
+                param: "id",
+                msg: "Invalid value"
+            }
+
+        ]
+    };
+
+    const statusCodeExpected = 422;
+
+    request(app)
+        .get(url)
+        .expect(statusCodeExpected)
+        .then((response) => {
+            const document = response.body;
+            assert.deepEqual(document, expectedResponse, message);
+            assert.end();
+            server.close()
+        }, (err) => {
+            assert.fail(err.message);
+            assert.end();
+            server.close()
+        });
+
+});
+
