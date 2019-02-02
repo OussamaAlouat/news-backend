@@ -72,3 +72,30 @@ test('-------- Controller: Get /document', (assert) => {
 
 });
 
+test('-------- Controller: Get /document', (assert) => {
+    const url = '/document';
+    const message = 'Status must be 200 and response must match with expected document';
+
+    const expectedDodument = [];
+
+    const payload = {
+        id: 'theDocumentWillNotBeAtDatabase'
+    };
+    const statusCodeExpected = 200;
+
+    request(app)
+        .get(url)
+        .send(payload)
+        .expect(statusCodeExpected)
+        .then((response) => {
+            const document = response.body.data;
+            assert.deepEqual(document, expectedDodument, message);
+            assert.end();
+            server.close()
+        }, (err) => {
+            assert.fail(err.message);
+            assert.end();
+            server.close()
+        });
+
+});
