@@ -54,7 +54,7 @@ const getOneDocument = (req, res) => {
 };
 
 const removeOneDocument = (req, res) => {
-    const {id} = req.body;
+    const {id} = req.query;
     Document.findByIdAndRemove(id)
         .then((result) => {
             const response = {
