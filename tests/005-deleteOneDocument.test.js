@@ -32,7 +32,6 @@ test('-------- Controller: Delete /document', (assert) => {
 test('-------- Controller: Delete /document', (assert) => {
     const getUrl = '/documents';
     const message = 'Status must be 200 and response must contains the id of deleted document';
-    const deleteUrl = '/document';
 
     const statusCodeExpected = 200;
 
@@ -52,9 +51,10 @@ test('-------- Controller: Delete /document', (assert) => {
                 document_id: payload.id
             };
 
+            const deleteUrl = `/document?id=${payload.id}`;
+
             request(app)
                 .delete(deleteUrl)
-                .send(payload)
                 .expect(statusCodeExpected)
                 .then((result) => {
                     assert.deepEqual(result.body.response, expectedResponse, message);
@@ -71,21 +71,17 @@ test('-------- Controller: Delete /document', (assert) => {
 });
 
 test('-------- Controller: Delete /document', (assert) => {
-    const url = '/document';
+    const url = '/document?id=ThisIdNotIdentifyAnyDocument';
     const message = 'Status must be 200 and response must match with expected response';
 
     const expectedResponse = {
         message: "Document not found"
     };
 
-    const payload = {
-        id: 'ThisIdNotIdentifyAnyDocument'
-    };
 
     const statusCodeExpected = 200;
     request(app)
         .delete(url)
-        .send(payload)
         .expect(statusCodeExpected)
         .then((response) => {
             const document = response.body;
