@@ -7,7 +7,7 @@ test('-------- Controller: Get /document', (assert) => {
     const message = 'Status must be 200 and response must match with expected document';
 
     const expectedDodument = {
-        archiveDate: null,
+        archiveDate: "2019-02-03T14:22:44.928Z",
         _id: "5c558bd2ae208a3965b13420",
         title: "New DocumentSat Feb 02 2019 13:23:46 GMT+0100 (Central European Standard Time)",
         description: "This is a new test document",
