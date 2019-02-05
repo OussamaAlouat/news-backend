@@ -25,8 +25,13 @@ const DocumentSchema = Schema({
         required: true
     },
     archiveDate: {
-        type:Date,
-        default:null
+        type: Date,
+        default: null
+    },
+
+    isArchived: {
+        type: Boolean,
+        default: false
     }
 });
 export default mongoose.model('Document', DocumentSchema);

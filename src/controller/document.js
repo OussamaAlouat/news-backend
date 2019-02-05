@@ -1,7 +1,7 @@
 import Document from '../model/document';
 
 const postDocument = (req, res) => {
-    const {title, description, date, content, author, archiveDate} = req.body;
+    const {title, description, date, content, author, archiveDate, isArchived} = req.body;
 
     //If there are one document with the same title, description, content and author is because is the same document that
     //we will put in our database.
@@ -17,7 +17,8 @@ const postDocument = (req, res) => {
                     date: date,
                     content: content,
                     author: author,
-                    archiveDate: archiveDate
+                    archiveDate: archiveDate,
+                    isArchived: isArchived
                 });
 
                 newDocument.save((err, data) => {
@@ -70,12 +71,13 @@ const removeOneDocument = (req, res) => {
 };
 
 const updateOneDocument = (req, res) => {
-    const {id, title, description, content, archiveDate} = req.body;
+    const {id, title, description, content, archiveDate, isArchived} = req.body;
     Document.findByIdAndUpdate(id, {
         title: title,
         description: description,
         content: content,
-        archiveDate: archiveDate
+        archiveDate: archiveDate,
+        isArchived: isArchived
     }).then((result) => {
         const response = {
             message: "Document updated"

@@ -26,7 +26,8 @@ test('-------- Controller: PUT /document', (assert) => {
                     description: 'This is a new test document',
                     content: 'The content of this document is a test',
                     author: 'Oussama Alouat',
-                    archiveDate: new Date()
+                    archiveDate: new Date(),
+                    isArchived: true
                 };
 
                 request(app)
@@ -63,7 +64,8 @@ test('-------- Controller: PUT /document', (assert) => {
         description: 'This is a new test document',
         content: 'The content of this document is a test',
         author: 'Oussama Alouat',
-        archiveDate: new Date()
+        archiveDate: new Date(),
+        isArchived: true
     };
 
     request(app)
@@ -110,7 +112,8 @@ test('-------- Controller: PUT /document', (assert) => {
                     title: 'Edited on: ' + new Date().getDay(),
                     description: 'This is a new test document',
                     content: 'The content of this document is a test',
-                    author: 'Oussama Alouat'
+                    author: 'Oussama Alouat',
+                    isArchived: true
                 };
 
                 request(app)
