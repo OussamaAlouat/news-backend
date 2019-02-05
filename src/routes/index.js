@@ -55,7 +55,8 @@ export default () => {
             check('title').isLength({min: 4}),
             check('description').isLength({min: 5}),
             check('content').isLength({min: 5}),
-            check('archiveDate').exists({checkNull: false})
+            check('archiveDate').exists({checkNull: false}),
+            check('isArchived').exists({checkFalsy: false})
         ],
         (req, res, next) => postCheckValidation(req, res, next),
         (req, res) => updateOneDocument(req, res)
