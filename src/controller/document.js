@@ -37,10 +37,21 @@ const postDocument = (req, res) => {
 };
 
 const getAllDocuments = (req, res) => {
-    Document.find()
-        .then((response) => {
-            res.status(200).json({data: response})
-        })
+
+    const {state} = req.query;
+
+    if (!state) {
+        Document.find()
+            .then((response) => {
+                res.status(200).json({data: response})
+            })
+    } else {
+        const petition = state === 'archived';
+        Document.find({isArchived: petition})
+            .then((response) => {
+                res.status(200).json({data: response})
+            })
+    }
 };
 
 const getOneDocument = (req, res) => {
