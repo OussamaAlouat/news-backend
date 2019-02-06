@@ -40,23 +40,17 @@ const getAllDocuments = (req, res) => {
 
     const {state} = req.query;
 
-    if (state === 'archived') {
-        Document.find({isArchived: true})
+    if (!state) {
+        Document.find()
             .then((response) => {
                 res.status(200).json({data: response})
             })
     } else {
-        if (state === 'new') {
-            Document.find({isArchived: false})
-                .then((response) => {
-                    res.status(200).json({data: response})
-                })
-        } else {
-            Document.find()
-                .then((response) => {
-                    res.status(200).json({data: response})
-                })
-        }
+        const petition = state === 'archived';
+        Document.find({isArchived: petition})
+            .then((response) => {
+                res.status(200).json({data: response})
+            })
     }
 };
 
