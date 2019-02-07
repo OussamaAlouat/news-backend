@@ -25,8 +25,12 @@ const postDocument = (req, res) => {
                     if (err) {
                         res.json(err)
                     } else {
-                        const message = 'Document created correctly';
-                        res.status(201).json({message})
+
+                        const returnData = {
+                            data: data,
+                            message:'Document created correctly'
+                        };
+                        res.status(201).json(returnData)
                     }
                 })
 

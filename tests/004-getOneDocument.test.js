@@ -6,30 +6,41 @@ test('-------- Controller: Get /document', (assert) => {
     const url = '/document';
     const message = 'Status must be 200 and response must match with expected document';
 
-    const expectedDodument = {
-        archiveDate: "2019-02-03T14:22:44.928Z",
-        _id: "5c558bd2ae208a3965b13420",
-        title: "New DocumentSat Feb 02 2019 13:23:46 GMT+0100 (Central European Standard Time)",
-        description: "This is a new test document",
-        date: "2019-02-02T12:23:46.946Z",
-        content: "The content of this document is a test",
-        author: "Oussama Alouat",
-        __v: 0
+    const postPayload = {
+        title: 'New Document' + new Date(),
+        description: 'This is a new test document created at : (' + new Date() +')',
+        date: new Date(),
+        content: 'The content of this document is a test',
+        author: 'Oussama Alouat',
+        archiveDate: null,
+        isArchived: false
     };
 
-    const payload = {
-        id: '5c558bd2ae208a3965b13420'
-    };
     const statusCodeExpected = 200;
 
     request(app)
-        .get(url)
-        .send(payload)
-        .expect(statusCodeExpected)
-        .then((response) => {
-            const document = response.body.data;
-            assert.deepEqual(document, expectedDodument, message);
-            assert.end();
+        .post('/document')
+        .send(postPayload)
+        .then((resp) => {
+            console.log('inside then')
+            const postedDocument= resp.body.data;
+            const {_id} = postedDocument;
+            const payload = {
+                id: _id
+            };
+
+            request(app)
+                .get(url)
+                .send(payload)
+                .expect(statusCodeExpected)
+                .then((response) => {
+                    const document = response.body.data;
+                    assert.deepEqual(document, postedDocument, message);
+                    assert.end();
+                }, (err) => {
+                    assert.fail(err.message);
+                    assert.end();
+                });
         }, (err) => {
             assert.fail(err.message);
             assert.end();
