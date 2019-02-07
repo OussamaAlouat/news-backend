@@ -5,9 +5,7 @@ import {app} from '../src/index';
 test('-------- Controller: Post /document', (assert) => {
     const url = '/document';
     const message = 'Status must be 201 and response must match with the expected simple message';
-    const responseExpected = {
-        message: "Document created correctly"
-    };
+
 
     const payload = {
         title: 'New Document' + new Date(),
@@ -16,7 +14,19 @@ test('-------- Controller: Post /document', (assert) => {
         content: 'The content of this document is a test',
         author: 'Oussama Alouat',
         archiveDate: null,
-        isArchived:false
+        isArchived: false
+    };
+
+    const responseExpected = {
+        message: "Document created correctly",
+        data: {
+            title: payload.title,
+            description: payload.description,
+            content: payload.content,
+            author: payload.author,
+            archiveDate: payload.archiveDate,
+            isArchived: payload.isArchived
+        }
     };
 
     const statusCodeExpected = 201;
@@ -25,7 +35,22 @@ test('-------- Controller: Post /document', (assert) => {
         .send(payload)
         .expect(statusCodeExpected)
         .then((res) => {
-                assert.deepEqual(res.body, responseExpected, message);
+
+                const actualResponse = res.body;
+
+                console.log(actualResponse)
+                const resp = {
+                    message: actualResponse.message,
+                    data: {
+                        title: actualResponse.data.title,
+                        description: actualResponse.data.description,
+                        content: actualResponse.data.content,
+                        author: actualResponse.data.author,
+                        archiveDate: actualResponse.data.archiveDate,
+                        isArchived: actualResponse.data.isArchived
+                    }
+                };
+                assert.deepEqual(resp, responseExpected, message);
                 assert.end();
             }, (err) => {
                 assert.fail(err.message);
@@ -52,7 +77,7 @@ test('-------- Controller: Post /document', (assert) => {
         content: 'The content of this document is a test',
         author: 'Oussama Alouat',
         archiveDate: null,
-        isArchived:false
+        isArchived: false
     };
     const statusCodeExpected = 409;
     request(app)
@@ -100,7 +125,7 @@ test('-------- Controller: Post /document', (assert) => {
         date: new Date(),
         content: 'The content of this document is a test',
         author: 'Oussama Alouat',
-        isArchived:false
+        isArchived: false
     };
 
     const statusCodeExpected = 422;
