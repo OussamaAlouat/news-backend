@@ -38,7 +38,6 @@ test('-------- Controller: Post /document', (assert) => {
 
                 const actualResponse = res.body;
 
-                console.log(actualResponse)
                 const resp = {
                     message: actualResponse.message,
                     data: {
