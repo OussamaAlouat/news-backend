@@ -5,20 +5,20 @@ const postDocument = (req, res) => {
 
     //If there are one document with the same title, description, content and author is because is the same document that
     //we will put in our database.
-    Document.find({title: title, description: description, author: author, content: content})
+    Document.find({title, description, author, content})
         .then((response) => {
             if (response.length > 0) {
                 const errorMessage = 'This document already exists on database';
                 res.status(409).json({message: errorMessage});
             } else {
                 const newDocument = new Document({
-                    title: title,
-                    description: description,
-                    date: date,
-                    content: content,
-                    author: author,
-                    archiveDate: archiveDate,
-                    isArchived: isArchived
+                    title,
+                    description,
+                    date,
+                    content,
+                    author,
+                    archiveDate,
+                    isArchived
                 });
 
                 newDocument.save((err, data) => {
@@ -88,11 +88,11 @@ const removeOneDocument = (req, res) => {
 const updateOneDocument = (req, res) => {
     const {id, title, description, content, archiveDate, isArchived} = req.body;
     Document.findByIdAndUpdate(id, {
-        title: title,
-        description: description,
-        content: content,
-        archiveDate: archiveDate,
-        isArchived: isArchived
+        title,
+        description,
+        content,
+        archiveDate,
+        isArchived
     }).then((result) => {
         const response = {
             message: "Document updated"
