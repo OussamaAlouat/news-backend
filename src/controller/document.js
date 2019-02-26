@@ -88,11 +88,11 @@ const removeOneDocument = (req, res) => {
 const updateOneDocument = (req, res) => {
     const {id, title, description, content, archiveDate, isArchived} = req.body;
     Document.findByIdAndUpdate(id, {
-        title: title,
-        description: description,
-        content: content,
-        archiveDate: archiveDate,
-        isArchived: isArchived
+        title,
+        description,
+        content,
+        archiveDate,
+        isArchived
     }).then((result) => {
         const response = {
             message: "Document updated"
