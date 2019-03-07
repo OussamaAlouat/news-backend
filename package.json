@@ -1,6 +1,6 @@
 {
   "name": "news-backend",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "description": "It is a simple backend created with MongoDB and express, that provide news.",
   "main": "index.js",
   "scripts": {
@@ -12,6 +12,7 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "cors": "^2.8.5",
+    "eslint": "^5.14.1",
     "express": "^4.16.4",
     "express-validator": "^5.3.1",
     "mongoose": "^5.4.9",
